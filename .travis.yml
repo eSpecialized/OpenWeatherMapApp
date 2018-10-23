@@ -1,0 +1,14 @@
+language: swift
+osx_image: xcode10
+os: osx
+xcode_sdk: iphonesimulator11.4
+
+before_install:
+  - gem install bundler
+  - bundle install
+  - pod repo update
+  - pod install
+
+script:
+ - set -o pipefail && xcodebuild -workspace WunderTDD.xcworkspace -scheme WunderTDDnoUITest -destination 'platform=iOS Simulator,OS=11.4,name=iPhone X' build test | xcpretty
+
